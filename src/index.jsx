@@ -1,17 +1,17 @@
 /**
-  * <ReactFormBuilder />
-*/
+ * <ReactFormBuilder />
+ */
 
-import React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { IntlProvider } from 'react-intl';
-import Preview from './preview';
-import Toolbar from './toolbar';
-import FormGenerator from './form';
-import store from './stores/store';
-import Registry from './stores/registry';
-import AppLocale from './language-provider';
+import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { IntlProvider } from "react-intl";
+import Preview from "./preview";
+import Toolbar from "./toolbar";
+import FormGenerator from "./form";
+import store from "./stores/store";
+import Registry from "./stores/registry";
+import AppLocale from "./language-provider";
 
 class ReactFormBuilder extends React.Component {
   constructor(props) {
@@ -48,15 +48,18 @@ class ReactFormBuilder extends React.Component {
       showDescription: this.props.show_description,
     };
 
-    const language = this.props.locale ? this.props.locale : 'en';
+    const language = this.props.locale ? this.props.locale : "en";
     const currentAppLocale = AppLocale[language];
-    if (this.props.toolbarItems) { toolbarProps.items = this.props.toolbarItems; }
+    if (this.props.toolbarItems) {
+      toolbarProps.items = this.props.toolbarItems;
+    }
     return (
       <DndProvider backend={HTML5Backend}>
         <IntlProvider
           locale={currentAppLocale.locale}
-          messages={currentAppLocale.messages}>
-          <div>
+          messages={currentAppLocale.messages}
+        >
+          <>
             {/* <div>
            <p>
              It is easy to implement a sortable interface with React DnD. Just make
@@ -66,7 +69,7 @@ class ReactFormBuilder extends React.Component {
            <Container />
          </div> */}
             <div className="react-form-builder clearfix">
-              <div>
+              <>
                 <Preview
                   files={this.props.files}
                   manualEditModeOff={this.manualEditModeOff.bind(this)}
@@ -84,10 +87,13 @@ class ReactFormBuilder extends React.Component {
                   editElement={this.state.editElement}
                   renderEditForm={this.props.renderEditForm}
                 />
-                <Toolbar {...toolbarProps} customItems={this.props.customToolbarItems} />
-              </div>
+                <Toolbar
+                  {...toolbarProps}
+                  customItems={this.props.customToolbarItems}
+                />
+              </>
             </div>
-          </div>
+          </>
         </IntlProvider>
       </DndProvider>
     );
@@ -95,12 +101,13 @@ class ReactFormBuilder extends React.Component {
 }
 
 function ReactFormGenerator(props) {
-  const language = props.locale ? props.locale : 'en';
+  const language = props.locale ? props.locale : "en";
   const currentAppLocale = AppLocale[language];
   return (
     <IntlProvider
       locale={currentAppLocale.locale}
-      messages={currentAppLocale.messages}>
+      messages={currentAppLocale.messages}
+    >
       <FormGenerator {...props} />
     </IntlProvider>
   );
@@ -115,5 +122,8 @@ FormBuilders.Registry = Registry;
 export default FormBuilders;
 
 export {
-  ReactFormBuilder, ReactFormGenerator, store as ElementStore, Registry,
+  ReactFormBuilder,
+  ReactFormGenerator,
+  store as ElementStore,
+  Registry,
 };
