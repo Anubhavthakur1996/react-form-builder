@@ -1,10 +1,12 @@
 .form-builder-wrapper {
   padding: 5%;
+  width: 100vw;
   display: flex;
   justify-content: space-evenly;
 
   .react-form-builder {
     display: flex;
+    width: inherit;
 
     .react-form-builder-preview {
       flex: 1;
@@ -440,6 +442,7 @@
 }
 
 .form-place-holder {
+  // height: 100%;
   margin: 10px;
   border: 2px dashed #bbb;
   -moz-border-radius: 5px;
