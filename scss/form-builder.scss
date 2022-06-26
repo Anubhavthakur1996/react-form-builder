@@ -17,6 +17,29 @@
 
     .react-form-builder-toolbar {
       flex: 1;
+
+      .css-bbq5bh {
+        display: block;
+
+        .css-f5brtt-BaseToolTop {
+          width: max-content;
+
+          .css-17oi9u9-Bubble {
+            color: white;
+            background: #555;
+            border: 1px solid #555;
+          }
+        }
+
+        .toolbar-item {
+          border: 1px solid #ddd;
+        }
+
+        .toolbar-item:hover {
+          box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+          transform: translate3d(0px, -1px, 0px);
+        }
+      }
     }
   }
 }

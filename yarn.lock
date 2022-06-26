@@ -1014,7 +1014,7 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
-"@emotion/core@^10.0.9":
+"@emotion/core@^10.0.10", "@emotion/core@^10.0.9":
   version "10.3.1"
   resolved "https://registry.yarnpkg.com/@emotion/core/-/core-10.3.1.tgz#4021b6d8b33b3304d48b0bb478485e7d7421c69d"
   integrity sha512-447aUEjPIm0MnE6QYIaFz9VQOHSXf4Iu6EWOIqq11EAPqinkSZmfymPTmlOE3QjLv846lH4JVZBUOtwGbuQoww==
@@ -5234,6 +5234,13 @@ react-signature-canvas@^1.0.3:
   dependencies:
     signature_pad "^2.3.2"
     trim-canvas "^0.1.0"
+
+react-simple-tooltip@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/react-simple-tooltip/-/react-simple-tooltip-2.6.3.tgz#94630c106e0adebbdafa6377f8e76824fed305db"
+  integrity sha512-ZZ6ObVewXW4+wabAoMlDezyX/auJAdCYBf7wMhZ7lc/5z6RV/AHS/xW2brUkdMoLAFY0jYUTIJGS41doncIgVw==
+  dependencies:
+    "@emotion/core" "^10.0.10"
 
 react-textarea-autosize@^7.1.2:
   version "7.1.2"
