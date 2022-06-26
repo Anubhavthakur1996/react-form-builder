@@ -450,8 +450,11 @@ class Toolbar extends React.Component {
       <div className="col-md-3 react-form-builder-toolbar float-right">
         <h4>{this.props.intl.formatMessage({ id: "toolbox" })}</h4>
         <ul>
-          {this.state.items.map((item) => (
-            <Tooltip content="Drag and drop or click to add to form">
+          {this.state.items.map((item, index) => (
+            <Tooltip
+              key={index}
+              content="Drag and drop or click to add to form"
+            >
               <ToolbarItem
                 data={item}
                 key={item.key}
