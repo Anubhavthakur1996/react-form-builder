@@ -141,7 +141,7 @@ export default function (ComposedComponent) {
 
       return connectDragPreview(
         connectDropTarget(
-          <div>
+          <div className="test-class">
             <ComposedComponent
               {...this.props}
               style={{ ...style, opacity }}
