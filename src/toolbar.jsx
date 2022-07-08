@@ -133,6 +133,24 @@ class Toolbar extends React.Component {
         content: intl.formatMessage({ id: "place-holder-text" }),
       },
       {
+        key: "Location",
+        name: "Location",
+        icon: "fas fa-location-arrow",
+        static: true,
+      },
+      {
+        key: "BarCodeScanner",
+        name: intl.formatMessage({ id: "bar-code-scanner" }),
+        icon: "fas fa-barcode",
+        static: true,
+      },
+      {
+        key: "Draw",
+        name: intl.formatMessage({ id: "free-draw" }),
+        icon: "fas fa-pen-square",
+        static: true,
+      },
+      {
         key: "Label",
         name: intl.formatMessage({ id: "label" }),
         static: true,

@@ -5,6 +5,7 @@ import React from "react";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
 import ReactBootstrapSlider from "react-bootstrap-slider";
+import BarcodeReader from "react-barcode-reader";
 
 import StarRating from "./star-rating";
 import DatePicker from "./date-picker";
@@ -980,6 +981,148 @@ class Range extends React.Component {
   }
 }
 
+class Draw extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      defaultValue: props.defaultValue,
+    };
+    this.inputField = React.createRef();
+    this.canvas = React.createRef();
+  }
+
+  clear = () => {
+    if (this.state.defaultValue) {
+      this.setState({ defaultValue: "" });
+    } else if (this.canvas.current) {
+      this.canvas.current.clear();
+    }
+  };
+
+  render() {
+    const { defaultValue } = this.state;
+    let canClear = !!defaultValue;
+    const props = {};
+    props.type = "hidden";
+    props.name = this.props.data.field_name;
+
+    if (this.props.mutable) {
+      props.defaultValue = defaultValue;
+      props.ref = this.inputField;
+    }
+    const pad_props = {};
+    // umd requires canvasProps={{ width: 400, height: 150 }}
+    if (this.props.mutable) {
+      pad_props.defaultValue = defaultValue;
+      pad_props.ref = this.canvas;
+      canClear = !this.props.read_only;
+    }
+
+    let baseClasses = "SortableItem rfb-item";
+    if (this.props.data.pageBreakBefore) {
+      baseClasses += " alwaysbreak";
+    }
+
+    let sourceDataURL;
+    if (defaultValue && defaultValue.length > 0) {
+      sourceDataURL = `data:image/png;base64,${defaultValue}`;
+    }
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <div className="form-group">
+          <ComponentLabel {...this.props} />
+          {this.props.read_only === true || !!sourceDataURL ? (
+            <img src={sourceDataURL} />
+          ) : (
+            <>
+              <div className="canvas-header-wrapper">
+                <h4>Draw below:</h4>
+                {canClear && (
+                  <i
+                    className="fas fa-times clear-signature"
+                    onClick={this.clear}
+                    title="Clear Canvas"
+                  ></i>
+                )}
+              </div>
+              <div className="canvas-wrapper">
+                <SignaturePad {...pad_props} />
+              </div>
+            </>
+          )}
+          <input {...props} />
+        </div>
+      </div>
+    );
+  }
+}
+
+class BarCodeScanner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      result: "No result",
+    };
+
+    this.handleScan = this.handleScan.bind(this);
+  }
+
+  handleScan(data) {
+    this.setState({
+      result: data,
+    });
+  }
+
+  handleError(err) {
+    console.error(err);
+  }
+
+  render() {
+    let baseClasses = "SortableItem rfb-item";
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <div className="form-group">
+          <BarcodeReader onError={this.handleError} onScan={this.handleScan} />
+          <p>{this.state.result}</p>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Location extends React.Component {
+  render() {
+    let classNames = "static";
+    if (this.props.data.bold) {
+      classNames += " bold";
+    }
+    if (this.props.data.italic) {
+      classNames += " italic";
+    }
+
+    let baseClasses = "SortableItem rfb-item";
+    if (this.props.data.pageBreakBefore) {
+      baseClasses += " alwaysbreak";
+    }
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <p
+          className={classNames}
+          dangerouslySetInnerHTML={{
+            __html: myxss.process(this.props.data.content),
+          }}
+        />
+      </div>
+    );
+  }
+}
+
 FormElements.Header = Header;
 FormElements.Paragraph = Paragraph;
 FormElements.Label = Label;
@@ -1000,5 +1143,8 @@ FormElements.Download = Download;
 FormElements.Camera = Camera;
 FormElements.FileUpload = FileUpload;
 FormElements.Range = Range;
+FormElements.Draw = Draw;
+FormElements.BarCodeScanner = BarCodeScanner;
+FormElements.Location = Location;
 
 export default FormElements;

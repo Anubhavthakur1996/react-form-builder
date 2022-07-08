@@ -1,5 +1,5 @@
-import Store from 'beedle';
-import { get, post } from './requests';
+import Store from "beedle";
+import { get, post } from "./requests";
 
 let _saveUrl;
 let _onPost;
@@ -8,23 +8,23 @@ let _onLoad;
 const store = new Store({
   actions: {
     setData(context, data, saveData) {
-      context.commit('setData', data);
+      context.commit("setData", data);
       if (saveData) this.save(data);
     },
 
     load(context, { loadUrl, saveUrl, data }) {
       _saveUrl = saveUrl;
       if (_onLoad) {
-        _onLoad().then(x => {
+        _onLoad().then((x) => {
           if (data && data.length > 0 && x.length === 0) {
-            data.forEach(y => x.push(y));
+            data.forEach((y) => x.push(y));
           }
           this.setData(context, x);
         });
       } else if (loadUrl) {
-        get(loadUrl).then(x => {
+        get(loadUrl).then((x) => {
           if (data && data.length > 0 && x.length === 0) {
-            data.forEach(y => x.push(y));
+            data.forEach((y) => x.push(y));
           }
           this.setData(context, x);
         });
@@ -34,6 +34,7 @@ const store = new Store({
     },
 
     create(context, element) {
+      debugger;
       const { data } = context.state;
       data.push(element);
       this.setData(context, data, true);
@@ -46,8 +47,8 @@ const store = new Store({
     },
 
     updateOrder(context, elements) {
-      const newData = elements.filter(x => x && !x.parentId);
-      elements.filter(x => x && x.parentId).forEach(x => newData.push(x));
+      const newData = elements.filter((x) => x && !x.parentId);
+      elements.filter((x) => x && x.parentId).forEach((x) => newData.push(x));
       // console.log('setAsChild', newData);
       this.setData(context, newData, true);
     },
