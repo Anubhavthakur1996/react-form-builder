@@ -762,33 +762,6 @@ export default class FormElementsEdit extends React.Component {
               />
             </div>
           )}
-        {this.props.element.canPopulateFromApi &&
-          this.props.element.hasOwnProperty("options") && (
-            <div className="form-group">
-              <label className="control-label" htmlFor="optionsApiUrl">
-                <IntlMessages id="populate-options-from-api" />
-              </label>
-              <div className="row">
-                <div className="col-sm-6">
-                  <input
-                    className="form-control"
-                    style={{ width: "100%" }}
-                    type="text"
-                    id="optionsApiUrl"
-                    placeholder="http://localhost:8080/api/optionsdata"
-                  />
-                </div>
-                <div className="col-sm-6">
-                  <button
-                    onClick={this.addOptions.bind(this)}
-                    className="btn btn-success"
-                  >
-                    <IntlMessages id="populate" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         {this.props.element.hasOwnProperty("options") && (
           <DynamicOptionList
             showCorrectColumn={this.props.showCorrectColumn}

@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import * as React from 'react';
+import * as React from "react";
 
 type BaseElement = {
   id: string;
@@ -33,7 +33,6 @@ type BaseElement = {
   canHaveOptionCorrect: boolean;
   canHaveOptionValue: boolean;
   canHavePageBreakBefore: boolean;
-  canPopulateFromApi: boolean;
   text: string;
 };
 export type StaticElement = {
@@ -88,7 +87,8 @@ export type SignatureElement = {
   readOnly: boolean;
 } & FormBuilderInput;
 export type TaskData = BaseElement &
-  (| StaticElement
+  (
+    | StaticElement
     | FormBuilderInput
     | SelectableElement
     | ImageElement

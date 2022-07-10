@@ -49,17 +49,17 @@ class Toolbar extends React.Component {
       case "Dropdown":
         return [
           {
-            value: "place_holder_option_1",
+            value: "yes",
             text: intl.formatMessage({ id: "place-holder-option-1" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_2",
+            value: "no",
             text: intl.formatMessage({ id: "place-holder-option-2" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_3",
+            value: "na",
             text: intl.formatMessage({ id: "place-holder-option-3" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
@@ -401,7 +401,6 @@ class Toolbar extends React.Component {
     }
     elementOptions.canHaveOptionCorrect = item.canHaveOptionCorrect !== false;
     elementOptions.canHaveOptionValue = item.canHaveOptionValue !== false;
-    elementOptions.canPopulateFromApi = item.canPopulateFromApi !== false;
 
     if (item.class_name) {
       elementOptions.class_name = item.class_name;
